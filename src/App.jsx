@@ -1,24 +1,23 @@
-import { useState } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
+import Navbar from "./components/Navbar/Navbar";
+import Footer from "./components/Footer/Footer";
+import Home from "./pages/Home/Home";
+import SignIn from "./pages/SignIn/SignIn";
+import Profile from "./pages/Profile/Profile";
 
 function App() {
-    const [count, setCount] = useState(0);
-
     return (
-        <>
-            <h1>Argent Bank</h1>
-            <div className="card">
-                <button onClick={() => setCount((count) => count + 1)}>
-                    count is {count}
-                </button>
-                <p>
-                    Edit <code>src/App.jsx</code> and save to test HMR
-                </p>
-            </div>
-            <p className="read-the-docs">
-                Click on the Vite and React logos to learn more
-            </p>
-        </>
+        <BrowserRouter>
+            <Navbar />
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/login" element={<SignIn />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="*" element={<Home />} />
+            </Routes>
+            <Footer />
+        </BrowserRouter>
     );
 }
 
