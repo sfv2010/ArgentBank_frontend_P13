@@ -1,24 +1,28 @@
-import { Link } from "react-router-dom";
+import { useState, useRef } from "react";
+import useSignInLogic from "../../hocks/useSignInLogic";
 import "./SignIn.css";
-// import { useState } from "react";
-// import { useDispatch } from "react-redux";
 
 function SignIn() {
-    // const [username, setUsername]= useState("")
-    // const [password, setPassword] = useState("");
-    // const dispatch = useDispatch();
+    const { handleSubmit, handleChange, errorMessage } = useSignInLogic();
+    const [user, setUser] = useState({
+        email: "",
+        password: "",
+    });
+    const errorRef = useRef(null);
+
     return (
         <main className="main bg-dark">
             <section className="sign-in-content ">
                 <i className="fa fa-user-circle sign-in-icon"></i>
                 <h1>Sign In</h1>
-                <form>
+                <form onSubmit={(e) => handleSubmit(e, user)}>
                     <div className="input-wrapper">
                         <label htmlFor="username">Username</label>
                         <input
-                            type="text"
+                            type="email"
                             id="username"
-                            name="username"
+                            name="email"
+                            onChange={(e) => handleChange(e, user, setUser)}
                             required
                         />
                     </div>
@@ -28,6 +32,7 @@ function SignIn() {
                             type="password"
                             id="password"
                             name="password"
+                            onChange={(e) => handleChange(e, user, setUser)}
                             required
                         />
                     </div>
@@ -36,15 +41,15 @@ function SignIn() {
                         <label htmlFor="remember-me">Remember me</label>
                     </div>
                     {/* <!-- PLACEHOLDER DUE TO STATIC SITE --> */}
-                    <Link to="/profile" className="sign-in-button">
+                    <div className="error" ref={errorRef}>
+                        {errorMessage}
+                    </div>
+                    <button className="sign-in-button" type="submit">
                         Sign In
-                    </Link>
-                    {/* <!-- SHOULD BE THE BUTTON BELOW --> */}
-                    {/* <button className="sign-in-button">Sign In</button> */}
+                    </button>
                 </form>
             </section>
         </main>
     );
 }
-
 export default SignIn;
