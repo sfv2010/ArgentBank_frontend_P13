@@ -11,10 +11,10 @@ const userSlice = createSlice({
     initialState,
     reducers: {
         userLogin: (state, { payload }) => {
-            //actionからpayloadを分割代入
+            //Destructive assignment from action
             state.token = payload.token;
-            state.firstName = payload.firstName;
-            state.lastName = payload.lastName;
+            //  state.firstName = payload.firstName;
+            // state.lastName = payload.lastName;
             state.email = payload.email;
         },
         userLogout: (state) => {
@@ -24,7 +24,6 @@ const userSlice = createSlice({
             state.email = null;
         },
         userName: (state, { payload }) => {
-            // 名前を更新する処理
             state.firstName = payload.firstName;
             state.lastName = payload.lastName;
         },
