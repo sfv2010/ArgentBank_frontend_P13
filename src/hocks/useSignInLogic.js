@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import loginUser from "../services/AuthApi";
-import { userLogin } from "../store/features/userSlice";
+import { userLogin } from "../store/features/UserSlice";
 
 function useSignInLogic() {
     const dispatch = useDispatch();
@@ -23,10 +23,8 @@ function useSignInLogic() {
 
             dispatch(
                 userLogin({
-                    token: response.token,
-                    firstName: response.firstName,
-                    lastName: response.lastName,
-                    email: response.email,
+                    token: response,
+                    email: user.email,
                 })
             );
 
