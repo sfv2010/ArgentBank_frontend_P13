@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../store/features/userSlice";
+import { userLogout } from "../../store/features/UserSlice";
 
 function Navbar() {
     const { firstName } = useSelector((store) => store.user);
@@ -25,14 +25,14 @@ function Navbar() {
                 </div>
             ) : (
                 <div>
-                    <Link to="/" className="main-nav-item">
+                    <Link to="/profile" className="main-nav-item">
                         <i className="fa fa-user-circle"></i>
                         {firstName}
                     </Link>
                     <Link
-                        to="/login"
+                        to="/"
                         className="main-nav-item"
-                        onClick={() => dispatch(logout())}>
+                        onClick={() => dispatch(userLogout())}>
                         <i className="fa fa-sign-out"></i>
                         Sign Out
                     </Link>
