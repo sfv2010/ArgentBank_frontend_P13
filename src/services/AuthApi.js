@@ -1,4 +1,4 @@
-async function loginUser(credentials) {
+async function loginUser(user) {
     try {
         const response = await fetch(
             "http://localhost:3001/api/v1/user/login",
@@ -7,7 +7,7 @@ async function loginUser(credentials) {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify(credentials),
+                body: JSON.stringify(user),
             }
         );
 
