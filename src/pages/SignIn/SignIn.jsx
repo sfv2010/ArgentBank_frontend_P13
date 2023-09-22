@@ -1,13 +1,9 @@
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import useSignInLogic from "../../hocks/useSignInLogic";
 import "./SignIn.css";
 
 function SignIn() {
-    const { handleSubmit, handleChange, errorMessage } = useSignInLogic();
-    const [user, setUser] = useState({
-        email: "",
-        password: "",
-    });
+    const { handleSubmit, errorMessage } = useSignInLogic();
     const errorRef = useRef(null);
 
     return (
@@ -15,14 +11,13 @@ function SignIn() {
             <section className="sign-in-content ">
                 <i className="fa fa-user-circle sign-in-icon"></i>
                 <h1>Sign In</h1>
-                <form onSubmit={(e) => handleSubmit(e, user)}>
+                <form onSubmit={(e) => handleSubmit(e)}>
                     <div className="input-wrapper">
                         <label htmlFor="username">Username</label>
                         <input
                             type="email"
                             id="username"
                             name="email"
-                            onChange={(e) => handleChange(e, user, setUser)}
                             required
                         />
                     </div>
@@ -32,7 +27,6 @@ function SignIn() {
                             type="password"
                             id="password"
                             name="password"
-                            onChange={(e) => handleChange(e, user, setUser)}
                             required
                         />
                     </div>
@@ -40,7 +34,6 @@ function SignIn() {
                         <input type="checkbox" id="remember-me" />
                         <label htmlFor="remember-me">Remember me</label>
                     </div>
-                    {/* <!-- PLACEHOLDER DUE TO STATIC SITE --> */}
                     <div className="error" ref={errorRef}>
                         {errorMessage}
                     </div>
