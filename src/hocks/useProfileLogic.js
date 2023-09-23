@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProfileData } from "../services/ProfileDataApi";
+import { editProfileData, getProfileData } from "../services/ProfileDataApi";
 import { userName } from "../store/features/UserSlice";
 
 function useProfileLogic() {
@@ -21,13 +21,33 @@ function useProfileLogic() {
                 console.error(error);
             }
         }
-        console.log(token);
         fetchData();
     }, [dispatch, token]);
+
+    const handleSaveProfileData = async (e, setIsEditing) => {
+        e.preventDefault();
+        try {
+            const updateName = {
+                firstName: e.target["firstName"].value || firstName,
+                lastName: e.target["lastName"].value || lastName,
+            };
+            const response = await editProfileData(token, updateName);
+            dispatch(
+                userName({
+                    firstName: response.firstName,
+                    lastName: response.lastName,
+                })
+            );
+            setIsEditing(false);
+        } catch (error) {
+            console.error("Profile update failed:", error);
+        }
+    };
 
     return {
         firstName,
         lastName,
+        handleSaveProfileData,
     };
 }
 
