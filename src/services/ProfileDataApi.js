@@ -14,7 +14,6 @@ export async function getProfileData(token) {
             throw new Error(`Failed to fetch data (HTTP ${response.status})`);
         }
         const data = await response.json();
-        //  console.log(data);
         return data.body;
     } catch (error) {
         console.log(error);
@@ -38,12 +37,9 @@ export async function editProfileData(token, updateProfileData) {
             throw new Error(`Failed to fetch data (HTTP ${response.status})`);
         }
         const data = await response.json();
-        console.log(data);
         return data.body;
     } catch (error) {
         console.log(error);
-        console.log(updateProfileData);
-        console.log(token);
         throw error;
     }
 }
