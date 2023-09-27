@@ -1,5 +1,7 @@
 import "./Profile.css";
 import useProfileLogic from "../../hocks/useProfileLogic";
+import Account from "../../components/Account/Account";
+import accountData from "../../data/mockAccountData";
 import { useState } from "react";
 
 function Profile() {
@@ -52,6 +54,7 @@ function Profile() {
                             </button>
                             <button
                                 className="modify-button"
+                                type="button"
                                 onClick={handleCancelClick}>
                                 Cancel
                             </button>
@@ -60,54 +63,14 @@ function Profile() {
                 )}
             </div>
             <h2 className="sr-only">Accounts</h2>
-            <section className="account">
-                <div className="account-content-wrapper">
-                    <h3 className="account-title">
-                        Argent Bank Checking (x8349)
-                    </h3>
-                    <p className="account-amount">$2,082.79</p>
-                    <p className="account-amount-description">
-                        Available Balance
-                    </p>
-                </div>
-                <div className="account-content-wrapper cta">
-                    <button className="transaction-button">
-                        View transactions
-                    </button>
-                </div>
-            </section>
-            <section className="account">
-                <div className="account-content-wrapper">
-                    <h3 className="account-title">
-                        Argent Bank Savings (x6712)
-                    </h3>
-                    <p className="account-amount">$10,928.42</p>
-                    <p className="account-amount-description">
-                        Available Balance
-                    </p>
-                </div>
-                <div className="account-content-wrapper cta">
-                    <button className="transaction-button">
-                        View transactions
-                    </button>
-                </div>
-            </section>
-            <section className="account">
-                <div className="account-content-wrapper">
-                    <h3 className="account-title">
-                        Argent Bank Credit Card (x8349)
-                    </h3>
-                    <p className="account-amount">$184.30</p>
-                    <p className="account-amount-description">
-                        Current Balance
-                    </p>
-                </div>
-                <div className="account-content-wrapper cta">
-                    <button className="transaction-button">
-                        View transactions
-                    </button>
-                </div>
-            </section>
+            {accountData.map((data) => (
+                <Account
+                    key={data.id}
+                    title={data.title}
+                    amount={data.amount}
+                    description={data.description}
+                />
+            ))}
         </main>
     );
 }
